@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install ninja-build gettext cmake curl build-essential
+sudo pacman -S base-devel cmake unzip ninja curl
 git clone -b stable https://github.com/neovim/neovim $HOME/repos/neovim
 cd $HOME/repos/neovim
 make CMAKE_BUILD_TYPE=RelWithDebInfo
