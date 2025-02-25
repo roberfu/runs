@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/repos/powerlevel10k
+echo 'source $HOME/repos/powerlevel10k/powerlevel10k.zsh-theme' >> $HOME/.zshrc
+exec zsh

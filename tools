@@ -1,1 +1,3 @@
-sudo apt install stow tmux zsh gcc unzip python3-full
+#!/bin/bash
+
+sudo pacman -S git python zsh alacritty firefox tmux stow ttf-hack-nerd xclip gnupg tree docker vim
