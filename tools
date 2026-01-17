@@ -1,5 +1,0 @@
-#!/bin/bash
-
-sudo apt update
-sudo apt upgrade -y
-sudo apt install git python3-full zsh stow tree vim maven fzf ripgrep openjdk-21-jdk golang-go -y
