@@ -10,8 +10,16 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 nvm install node --lts
-source ~/.bashrc
+source $HOME/.bashrc
+
+sudo apt-get install ninja-build gettext cmake curl build-essential git
+git clone https://github.com/neovim/neovim $HOME/vendors/neovim
+cd $HOME/vendors/neovim
+git checkout stable
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+source $HOME/.bashrc
 
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git $HOME/vendors/nerd-fonts
 cd $HOME/vendors/nerd-fonts
-./install.sh JetBrainsMono
+./install.sh Hack
