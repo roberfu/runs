@@ -8,7 +8,6 @@ fzf ripgrep openjdk-25-jdk golang-go rustup
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
 nvm install node --lts
 source $HOME/.bashrc
 
@@ -25,3 +24,10 @@ cd $HOME/vendors/nerd-fonts
 ./install.sh Hack
 
 curl -fsS https://dl.brave.com/install.sh | sh
+
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
+| sudo tee /etc/apt/sources.list.d/vscodium.sources
+sudo apt update && sudo apt install codium
