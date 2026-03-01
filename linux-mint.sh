@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y mpv alacritty qbittorrent git python3-full stow tree maven \
-fzf ripgrep openjdk-25-jdk golang-go rustup
+fzf ripgrep openjdk-25-jdk golang-go rustup podman
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
