@@ -1,5 +1,5 @@
 $apps = @(
-    "Hibbiki.Chromium",
+    "Brave.Brave",
     "7zip.7zip",
     "Git.Git",
     "Neovim.Neovim",
@@ -9,13 +9,15 @@ $apps = @(
     "Notepad++.Notepad++",
     "Python.Python.3.14",
     "CoreyButler.NVMforWindows",
-    "Oracle.JDK.21",
+    "Oracle.JDK.25",
     "RedHat.Podman",
-    "ZedIndustries.Zed",
     "VideoLAN.VLC",
-    "JetBrains.Toolbox",
     "VSCodium.VSCodium",
-    "Valve.Steam"
+    "Valve.Steam",
+    "ONLYOFFICE.DesktopEditors",
+    "Discord.Discord",
+    "Gyan.FFmpeg",
+    "Spotify.Spotify"
 )
 
 function Refresh-Path {
@@ -26,14 +28,14 @@ foreach ($app in $apps) {
     winget install --id $app --silent --accept-package-agreements --accept-source-agreements
 }
 
-$origen = Join-Path $PSScriptRoot "\..\dotfiles\.gitconfig"
-$destino = "C:\Users\Roberto\.gitconfig"
-
-Copy-Item -Path $origen -Destination $destino -Force
-
-Refreash-Path
+Refresh-Path
 
 nvm install lts
 nvm use lts
 
 Refresh-Path
+
+$origen = Join-Path $PSScriptRoot "\..\dotfiles\.gitconfig"
+$destino = "C:\Users\Roberto\.gitconfig"
+
+Copy-Item -Path $origen -Destination $destino -Force
