@@ -18,10 +18,12 @@ $apps = @(
     "Discord.Discord",
     "Gyan.FFmpeg",
     "Spotify.Spotify",
-    "Ventoy.Ventoy"
+    "Ventoy.Ventoy",
+    "hoppscotch.Hoppscotch",
+    "DBeaver.DBeaver.Community"
 )
 
-function Refresh-Path {
+function Refresh {
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
 
@@ -29,14 +31,19 @@ foreach ($app in $apps) {
     winget install --id $app --silent --accept-package-agreements --accept-source-agreements
 }
 
-Refresh-Path
-
+Refresh
 nvm install lts
 nvm use lts
+Refresh
 
-Refresh-Path
+$base = Join-Path $PSScriptRoot "..\dotfiles"
+$dir = "C:\Users\Roberto"
 
-$origen = Join-Path $PSScriptRoot "\..\dotfiles\.gitconfig"
-$destino = "C:\Users\Roberto\.gitconfig"
+$archivos = @(
+    @{ origen = "$base\.gitconfig"; destino = "$dir\.gitconfig" },
+    @{ origen = "$base\.config\VSCodium\User\settings.json"; destino = "$dir\AppData\Roaming\VSCodium\User\settings.json" }
+)
 
-Copy-Item -Path $origen -Destination $destino -Force
+foreach ($archivo in $archivos) {
+    Copy-Item -Path $archivo.origen -Destination $archivo.destino -Force
+}
