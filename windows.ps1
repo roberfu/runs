@@ -17,7 +17,8 @@ $apps = @(
     "ONLYOFFICE.DesktopEditors",
     "Discord.Discord",
     "Gyan.FFmpeg",
-    "Spotify.Spotify"
+    "Spotify.Spotify",
+    "Ventoy.Ventoy"
 )
 
 function Refresh-Path {
