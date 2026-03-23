@@ -32,8 +32,14 @@ foreach ($app in $apps) {
 }
 
 Refresh
-nvm install lts
-nvm use lts
+
+try {
+    nvm install lts
+    nvm use lts
+} catch {
+    Write-Warning "NVM no disponible. Revisa esta seccion en el archivo y vuelve a ejecutar este codigo mas tarde."
+}
+
 Refresh
 
 $base = Join-Path $PSScriptRoot "..\dotfiles"
@@ -47,3 +53,5 @@ $archivos = @(
 foreach ($archivo in $archivos) {
     Copy-Item -Path $archivo.origen -Destination $archivo.destino -Force
 }
+
+wsl --install
