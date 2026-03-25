@@ -20,7 +20,8 @@ $apps = @(
     "Spotify.Spotify",
     "Ventoy.Ventoy",
     "hoppscotch.Hoppscotch",
-    "DBeaver.DBeaver.Community"
+    "DBeaver.DBeaver.Community",
+    "Yarn.Yarn"
 )
 
 function Refresh {
