@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y mpv alacritty qbittorrent git python3-full stow tree maven \
@@ -12,24 +14,34 @@ nvm install node --lts
 source $HOME/.bashrc
 
 sudo apt-get install ninja-build gettext cmake curl build-essential git
-git clone https://github.com/neovim/neovim $HOME/vendors/neovim
+if [ ! -d "$HOME/vendors/neovim" ]; then
+    git clone https://github.com/neovim/neovim $HOME/vendors/neovim
+fi
 cd $HOME/vendors/neovim
 git checkout stable
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
 source $HOME/.bashrc
 
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git $HOME/vendors/nerd-fonts
+if [ ! -d "$HOME/vendors/nerd-fonts" ]; then
+    git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git $HOME/vendors/nerd-fonts
+fi
 cd $HOME/vendors/nerd-fonts
 ./install.sh Hack
 
-curl -fsS https://dl.brave.com/install.sh | sh
+if ! command -v brave-browser &> /dev/null; then
+    curl -fsS https://dl.brave.com/install.sh | sh
+fi
 
-wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
-    | gpg --dearmor \
-    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
-echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
-| sudo tee /etc/apt/sources.list.d/vscodium.sources
-sudo apt update && sudo apt install codium
+if ! command -v codium &> /dev/null; then
+    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+        | gpg --dearmor \
+        | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+    echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
+    | sudo tee /etc/apt/sources.list.d/vscodium.sources
+    sudo apt update && sudo apt install codium
+fi
 
-curl -f https://zed.dev/install.sh | sh
+if ! command -v zed &> /dev/null; then
+    curl -f https://zed.dev/install.sh | sh
+fi
