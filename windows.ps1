@@ -21,7 +21,10 @@ $apps = @(
     "Ventoy.Ventoy",
     "hoppscotch.Hoppscotch",
     "DBeaver.DBeaver.Community",
-    "Yarn.Yarn"
+    "Yarn.Yarn",
+    "Rustlang.Rustup",
+    "GoLang.Go",
+    "Microsoft.VisualStudio.BuildTools"
 )
 
 function Refresh {
