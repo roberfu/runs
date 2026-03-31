@@ -1,30 +1,19 @@
 $apps = @(
-    "Brave.Brave",
-    "7zip.7zip",
+    "Mozilla.Firefox",
     "Git.Git",
-    "Neovim.Neovim",
-    "Microsoft.VCRedist.2015+.x64",
     "RevoUninstaller.RevoUninstaller",
     "qBittorrent.qBittorrent",
     "Notepad++.Notepad++",
-    "Python.Python.3.14.3",
-    "CoreyButler.NVMforWindows",
-    "Oracle.JDK.25",
     "RedHat.Podman",
     "VideoLAN.VLC",
     "VSCodium.VSCodium",
     "Valve.Steam",
     "ONLYOFFICE.DesktopEditors",
     "Discord.Discord",
-    "Gyan.FFmpeg",
     "Spotify.Spotify",
     "Ventoy.Ventoy",
     "hoppscotch.Hoppscotch",
-    "DBeaver.DBeaver.Community",
-    "Yarn.Yarn",
-    "Rustlang.Rustup",
-    "GoLang.Go",
-    "Microsoft.VisualStudio.BuildTools"
+    "DBeaver.DBeaver.Community"
 )
 
 function Refresh {
@@ -42,15 +31,6 @@ foreach ($app in $apps) {
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "Error al instalar $app. Continuando con el siguiente..."
     }
-}
-
-Refresh
-
-try {
-    nvm install lts
-    nvm use lts
-} catch {
-    Write-Warning "NVM no disponible. Revisa esta seccion en el archivo y vuelve a ejecutar este codigo mas tarde."
 }
 
 Refresh
@@ -86,5 +66,5 @@ if ([string]::IsNullOrWhiteSpace($wslCheck)) {
     Write-Host "Instalando WSL..."
     wsl --install
 } else {
-    Write-Host "WSL ya está instalado."
+    Write-Host "WSL ya esta instalado."
 }
