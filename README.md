@@ -7,6 +7,7 @@ Scripts de configuración para mi entorno de trabajo.
 ### Windows
 ```powershell
 .\windows.ps1
+.\scoop.ps1
 ```
 
 ### Linux (WSL Ubuntu)
