@@ -25,10 +25,10 @@ if ! nvim --version &> /dev/null || [[ $(nvim --version 2>/dev/null | head -1 | 
     fi
     pushd $HOME/vendors/neovim
     git checkout stable
-    git pull
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
     popd
 fi
 
 npm install -g tree-sitter-cli
+npm i -g opencode-ai

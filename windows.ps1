@@ -106,6 +106,9 @@ try {
     Write-Warning "NVM no disponible."
 }
 
+Refresh
+npm i -g opencode-ai
+
 rustup toolchain install stable-x86_64-pc-windows-gnu
 rustup default stable-x86_64-pc-windows-gnu
 
