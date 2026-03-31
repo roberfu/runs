@@ -6,6 +6,7 @@ Scripts de configuración para mi entorno de trabajo.
 
 ### Windows
 ```powershell
+Set-ExecutionPolicy Unrestricted
 .\windows.ps1
 .\scoop.ps1
 ```
