@@ -30,3 +30,5 @@ if ! nvim --version &> /dev/null || [[ $(nvim --version 2>/dev/null | head -1 | 
     sudo make install
     popd
 fi
+
+npm install -g tree-sitter-cli
