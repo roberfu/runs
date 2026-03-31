@@ -8,7 +8,6 @@ Scripts de configuración para mi entorno de trabajo.
 ```powershell
 Set-ExecutionPolicy Unrestricted
 .\windows.ps1
-.\scoop.ps1
 ```
 
 ### Linux (WSL Ubuntu)
