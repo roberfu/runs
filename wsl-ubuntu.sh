@@ -30,5 +30,7 @@ if ! nvim --version &> /dev/null || [[ $(nvim --version 2>/dev/null | head -1 | 
     popd
 fi
 
+source ~/.bashrc
+nvm install --lts
 npm install -g tree-sitter-cli
 npm i -g opencode-ai
