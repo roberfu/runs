@@ -12,20 +12,28 @@ Set-ExecutionPolicy Unrestricted
 
 ### Linux (WSL Ubuntu)
 ```bash
-./wsl-ubuntu.sh
+bash wsl-ubuntu.sh
 ```
 
 ### Fedora
 ```bash
-./fedora.sh
+bash fedora.sh
 ```
 
 ### Linux Mint
 ```bash
-./linux-mint.sh
+bash linux-mint.sh
 ```
 
-## Requisitos
+### Arch Linux
+```bash
+bash arch-linux.sh
+```
 
-- **Windows**: Winget instalado
-- **Linux**: sudo/root
+## Archivos
+
+- `windows.ps1` - Windows
+- `wsl-ubuntu.sh` - WSL Ubuntu
+- `fedora.sh` - Fedora
+- `linux-mint.sh` - Linux Mint
+- `arch-linux.sh` - Arch Linux
