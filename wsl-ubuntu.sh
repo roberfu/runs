@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-
 sudo apt update
 sudo apt upgrade -y
 sudo apt install -y git python3-full stow tree maven fzf ripgrep openjdk-25-jdk \
