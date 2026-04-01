@@ -33,3 +33,4 @@ source ~/.bashrc
 nvm install --lts
 npm install -g tree-sitter-cli
 npm i -g opencode-ai
+rustup default stable
