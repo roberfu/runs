@@ -21,50 +21,17 @@ $apps = @(
     "Oracle.OpenJDK.25",
     "Gyan.FFmpeg",
     "cURL.cURL",
-    "CoreyButler.NVMforWindows",
     "Yarn.Yarn",
-    "MSYS2.MSYS2"
+    "MSYS2.MSYS2",
+    "OpenJS.NodeJS.LTS",
+    "Neovim.Neovim",
+    "Microsoft.VCRedist.2015+.x64",
+    "Microsoft.OpenJDK.25"
 )
-
-function Find-NvmRoot {
-    $candidates = @(
-        "$env:APPDATA\nvm",
-        "$env:ProgramFiles\nvm",
-        "${env:ProgramFiles(x86)}\nvm",
-        "$env:LOCALAPPDATA\nvm"
-    )
-    foreach ($c in $candidates) {
-        if (Test-Path "$c\nvm.exe") { return $c }
-    }
-    $fromPath = Get-Command nvm.exe -ErrorAction SilentlyContinue
-    if ($fromPath) { return Split-Path $fromPath.Source }
-    return $null
-}
 
 function Refresh {
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
-                [System.Environment]::GetEnvironmentVariable("Path", "User")
-
-    $nvmRoot = Find-NvmRoot
-    if (-not $nvmRoot) { return }
-
-    $env:Path = "$nvmRoot;$env:Path"
-
-    $nvmSymlink = "$nvmRoot\current"
-    if (-not (Test-Path $nvmSymlink)) { return }
-
-    $nodeDir = (Get-Item $nvmSymlink -Force).Target
-    if (-not $nodeDir) { return }
-    $nodeDirResolved = $nodeDir -replace '\\current$', "\v$((& "$nvmRoot\nvm.exe" list 2>&1 | Select-String '\*' | Select-Object -First 1) -replace '.*\*\s*','' -replace '\s.*','')"
-
-    if (Test-Path "$nodeDir\node.exe") {
-        $env:Path = "$nodeDir;$env:Path"
-    } else {
-        $found = Get-ChildItem "$nvmRoot" -Filter "node.exe" -Recurse -Depth 2 -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($found) {
-            $env:Path = "$($found.DirectoryName);$env:Path"
-        }
-    }
+    [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
 
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
@@ -82,29 +49,6 @@ foreach ($app in $apps) {
 
 Refresh
 
-Write-Host "`n>>> Instalando Node LTS con NVM..." -ForegroundColor Cyan
-
-$nvmRoot = Find-NvmRoot
-if ($nvmRoot) {
-    $nvmExe = "$nvmRoot\nvm.exe"
-    & $nvmExe install lts
-    & $nvmExe use lts
-    Refresh
-
-    $nodeExe = Get-Command node -ErrorAction SilentlyContinue
-    if (-not $nodeExe) {
-        $found = Get-ChildItem $nvmRoot -Filter "node.exe" -Recurse -Depth 2 -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($found) {
-            $env:Path = "$($found.DirectoryName);$env:Path"
-        }
-    }
-
-    Write-Host "Node: $(node --version 2>&1)"
-    Write-Host "npm:  $(npm --version 2>&1)"
-} else {
-    Write-Warning "nvm.exe no encontrado. Comprueba la instalacion de NVM for Windows."
-}
-
 Write-Host "`n>>> Instalando opencode-ai..." -ForegroundColor Cyan
 
 if (Get-Command npm -ErrorAction SilentlyContinue) {
@@ -112,7 +56,8 @@ if (Get-Command npm -ErrorAction SilentlyContinue) {
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "Error al instalar opencode-ai (codigo $LASTEXITCODE)."
     }
-} else {
+}
+else {
     Write-Warning "npm no esta disponible. No se puede instalar opencode-ai."
 }
 
@@ -122,9 +67,9 @@ if (Get-Command rustup -ErrorAction SilentlyContinue) {
     rustup default stable-x86_64-pc-windows-gnu
     rustup target add x86_64-pc-windows-gnu
 }
-
+  
 $base = Join-Path $PSScriptRoot "..\dotfiles"
-$dir  = "C:\Users\$env:USERNAME"
+$dir = "C:\Users\$env:USERNAME"
 
 if (-not (Test-Path $base)) {
     Write-Host "`n>>> Clonando dotfiles desde GitHub..." -ForegroundColor Cyan
@@ -136,7 +81,7 @@ if (-not (Test-Path $base)) {
 }
 
 $archivos = @(
-    @{ origen = "$base\.gitconfig";                           destino = "$dir\.gitconfig" },
+    @{ origen = "$base\.gitconfig"; destino = "$dir\.gitconfig" },
     @{ origen = "$base\.config\VSCodium\User\settings.json"; destino = "$dir\AppData\Roaming\VSCodium\User\settings.json" }
 )
 
@@ -149,7 +94,8 @@ foreach ($archivo in $archivos) {
         }
         Copy-Item -Path $archivo.origen -Destination $archivo.destino -Force
         Write-Host "Copiado: $($archivo.origen)"
-    } else {
+    }
+    else {
         Write-Warning "No encontrado: $($archivo.origen)"
     }
 }
@@ -157,7 +103,8 @@ foreach ($archivo in $archivos) {
 $wslStatus = wsl --status 2>&1
 if ($LASTEXITCODE -eq 0 -and $wslStatus -notmatch 'not installed') {
     Write-Host "`nWSL ya esta instalado."
-} else {
+}
+else {
     Write-Host "`n>>> Instalando WSL..." -ForegroundColor Cyan
     wsl --install
 }
