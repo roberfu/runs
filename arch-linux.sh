@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed \
     mpv alacritty qbittorrent git python stow tree maven \
