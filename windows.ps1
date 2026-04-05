@@ -82,6 +82,7 @@ if (-not (Test-Path $base)) {
 
 $archivos = @(
     @{ origen = "$base\.gitconfig"; destino = "$dir\.gitconfig" },
+    @{ origen = "$base\.gitattributes"; destino = "$dir\.gitattributes" },
     @{ origen = "$base\.config\VSCodium\User\settings.json"; destino = "$dir\AppData\Roaming\VSCodium\User\settings.json" }
 )
 
