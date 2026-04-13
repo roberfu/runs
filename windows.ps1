@@ -26,7 +26,8 @@ $apps = @(
     "OpenJS.NodeJS.LTS",
     "Neovim.Neovim",
     "Microsoft.VCRedist.2015+.x64",
-    "Microsoft.OpenJDK.25"
+    "Microsoft.OpenJDK.25",
+    "Hibbiki.Chromium"
 )
 
 function Refresh {
@@ -49,17 +50,8 @@ foreach ($app in $apps) {
 
 Refresh
 
-Write-Host "`n>>> Instalando opencode-ai..." -ForegroundColor Cyan
-
-if (Get-Command npm -ErrorAction SilentlyContinue) {
-    npm install -g opencode-ai
-    if ($LASTEXITCODE -ne 0) {
-        Write-Warning "Error al instalar opencode-ai (codigo $LASTEXITCODE)."
-    }
-}
-else {
-    Write-Warning "npm no esta disponible. No se puede instalar opencode-ai."
-}
+Write-Host "`n>>> Instalando Claude Code..." -ForegroundColor Cyan
+irm https://claude.ai/install.ps1 | iex
 
 if (Get-Command rustup -ErrorAction SilentlyContinue) {
     Write-Host "`n>>> Configurando Rust..." -ForegroundColor Cyan
@@ -109,3 +101,17 @@ else {
     Write-Host "`n>>> Instalando WSL..." -ForegroundColor Cyan
     wsl --install
 }
+
+# ==============================================================
+# RECORDATORIOS POST-INSTALACION (pasos manuales)
+# ==============================================================
+
+# PATH: Agregar al PATH las herramientas/aplicaciones que lo requieran
+# (por ejemplo: Go, Python, Cargo, MSYS2, etc.)
+
+# EXTENSIONES DEL NAVEGADOR: Instalar en el explorador que se vaya a usar:
+#   - Raindrop.io
+#   - Bitwarden
+#   - uBlock Origin
+#   - Custom New Tab
+#   - DuckDuckGo Privacy Essentials
