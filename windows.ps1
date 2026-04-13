@@ -7,7 +7,6 @@ $apps = @(
     "7zip.7zip",
     "RedHat.Podman",
     "VideoLAN.VLC",
-    "VSCodium.VSCodium",
     "Valve.Steam",
     "ONLYOFFICE.DesktopEditors",
     "Discord.Discord",
