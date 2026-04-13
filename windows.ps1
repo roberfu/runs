@@ -27,7 +27,8 @@ $apps = @(
     "Neovim.Neovim",
     "Microsoft.VCRedist.2015+.x64",
     "Microsoft.OpenJDK.25",
-    "Hibbiki.Chromium"
+    "Hibbiki.Chromium",
+    "ZedIndustries.Zed"
 )
 
 function Refresh {
@@ -59,7 +60,7 @@ if (Get-Command rustup -ErrorAction SilentlyContinue) {
     rustup default stable-x86_64-pc-windows-gnu
     rustup target add x86_64-pc-windows-gnu
 }
-  
+
 $base = Join-Path $PSScriptRoot "..\dotfiles"
 $dir = "C:\Users\$env:USERNAME"
 
@@ -102,16 +103,16 @@ else {
     wsl --install
 }
 
-# ==============================================================
-# RECORDATORIOS POST-INSTALACION (pasos manuales)
-# ==============================================================
+Write-Host "`n============================================================" -ForegroundColor Yellow
+Write-Host "  RECORDATORIOS POST-INSTALACION (pasos manuales)" -ForegroundColor Yellow
+Write-Host "============================================================" -ForegroundColor Yellow
 
-# PATH: Agregar al PATH las herramientas/aplicaciones que lo requieran
-# (por ejemplo: Go, Python, Cargo, MSYS2, etc.)
+Write-Host "`nPATH: Agregar al PATH las herramientas que lo requieran:" -ForegroundColor Yellow
+Write-Host "  - Go, Python, Cargo, MSYS2, etc." -ForegroundColor Yellow
 
-# EXTENSIONES DEL NAVEGADOR: Instalar en el explorador que se vaya a usar:
-#   - Raindrop.io
-#   - Bitwarden
-#   - uBlock Origin
-#   - Custom New Tab
-#   - DuckDuckGo Privacy Essentials
+Write-Host "`nEXTENSIONES DEL NAVEGADOR: Instalar en el explorador a usar:" -ForegroundColor Yellow
+Write-Host "  - Raindrop.io" -ForegroundColor Yellow
+Write-Host "  - Bitwarden" -ForegroundColor Yellow
+Write-Host "  - uBlock Origin" -ForegroundColor Yellow
+Write-Host "  - Custom New Tab" -ForegroundColor Yellow
+Write-Host "  - DuckDuckGo Privacy Essentials" -ForegroundColor Yellow
