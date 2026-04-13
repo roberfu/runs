@@ -115,3 +115,5 @@ Write-Host "  - Bitwarden" -ForegroundColor Yellow
 Write-Host "  - uBlock Origin" -ForegroundColor Yellow
 Write-Host "  - Custom New Tab" -ForegroundColor Yellow
 Write-Host "  - DuckDuckGo Privacy Essentials" -ForegroundColor Yellow
+
+Write-Host "`nANCLAR AL INICIO Y EN LA BARRA DE TAREAS APLICACIONES MAS USADAS" -ForegroundColor Yellow
